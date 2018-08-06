@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  DebuggingDemo
 //
-//  Debuged and Fixed by Mohamed Fouda on 8/6/18.
+//  Debugged and Fixed by Mohamed Fouda on 8/6/18.
 //  Created by Hesham Abd-Elmegid on 7/17/16.
 //  Copyright © 2016 CareerFoundry. All rights reserved.
 //
@@ -15,8 +15,11 @@ class LinksViewController: UITableViewController, SFSafariViewControllerDelegate
     
     var links: Array<String> {
         get {
-            let linksFromUserDefaults = UserDefaults.standard.object(forKey: userDefaultsKey)
-            return linksFromUserDefaults as! Array<String>
+            if let linksFromUserDefaults = UserDefaults.standard.object(forKey: userDefaultsKey) {
+                return linksFromUserDefaults as! Array<String>
+            }
+            
+            return []
         }
         set {
             UserDefaults.standard.set(newValue, forKey: userDefaultsKey)
@@ -66,8 +69,11 @@ class LinksViewController: UITableViewController, SFSafariViewControllerDelegate
     }
     
     func openURL(_ urlString: String) {
-        let url = URL(string: urlString)!
-        let safariViewController = SFSafariViewController(url: url)
+        guard let url = URL(string: urlString), urlString.lowercased().hasPrefix("http://") || urlString.lowercased().hasPrefix("https://") else {
+            return
+        }
+        
+        let safariViewController = SFSafariViewController(url: url as URL)
         safariViewController.delegate = self
         self.present(safariViewController, animated: true, completion: nil)
     }

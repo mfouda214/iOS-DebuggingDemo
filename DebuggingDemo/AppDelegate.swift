@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  DebuggingDemo
 //
-//  Debuged and Fixed by Mohamed Fouda on 8/6/18.
+//  Debugged and Fixed by Mohamed Fouda on 8/6/18.
 //  Created by Hesham Abd-Elmegid on 7/17/16.
 //  Copyright © 2016 CareerFoundry. All rights reserved.
 //
